@@ -1,0 +1,18 @@
+name: PokeBot Notification
+on:
+  pull_request:
+    branches:
+      - master
+jobs:
+  pull_request_notification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: PR Opened
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          username: PokeBot
+          avatarUrl: https://res.cloudinary.com/bruncky/image/upload/v1584482827/Pok%C3%A9Rails/Pikachu%20Logo.png
+          description: "**Event:** ${{ github.EVENT_NAME }}\n**Repo:** ${{ github.REPOSITORY }}\n**Author:** ${{ github.ACTOR }}\n**Title:** ${{ github.EVENT }}\n**Body:** ${{ github.EVENT }}\n**Branch:** ${{ github.HEAD_REF }}"
+          severity: info
+          color: '#ff00aa'
+          webhookUrl: ${{ secrets.POKE_BOT }}
