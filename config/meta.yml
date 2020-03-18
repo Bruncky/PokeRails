@@ -1,0 +1,5 @@
+meta_product_name: "PokéRails"
+meta_title: "PokéRails - Your Hub for Everything Pokémon!"
+meta_description: "PokéRails is your one-stop shop for everything Pokémon. Here you will find information on anything from Pokémon to Berries, a tool to create and modify Pokémon teams and a Forum to exchange information with other users."
+meta_image: "cover.png" # should exist in `app/assets/images/`
+twitter_account: "@PokeRails"   # required for Twitter Cards
