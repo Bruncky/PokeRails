@@ -4,7 +4,7 @@
 <%= form.error_notification %>
 
 <div class="form-inputs">
-    <%= form.input :username, required: true, autofocus: true %>
+    <%= form.input :username, required: true, placeholder: "case-sensitive!", autofocus: true %>
     <%= form.input :email, required: true, input_html: { autocomplete: "email" }%>
     <%= form.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), input_html: { autocomplete: "new-password" } %>
     <%= form.input :password_confirmation, required: true, input_html: { autocomplete: "new-password" } %>
