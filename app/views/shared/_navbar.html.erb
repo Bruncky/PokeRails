@@ -20,7 +20,7 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <%= link_to "Profile", user_path(current_user), class: "dropdown-item" %>
                         <%= link_to "Messages", "#", class: "dropdown-item" %>
-                        <%= link_to "My Teams", user_teams_path, class: "dropdown-item" %>
+                        <%= link_to "My Teams", user_teams_path(current_user), class: "dropdown-item" %>
                         <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
                             <i class="fas fa-sign-out-alt" id="logout-button"></i>
                         <% end %>
