@@ -7,6 +7,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <%= link_to root_path do %>
+                    <button type="button" class="btn btn-warning btn-lg">
+                        Forum
+                    </button>
+                <% end %>
+            </li>
             <% if user_signed_in? %>
                 <li class="nav-item dropdown">
                     <%= image_tag user_avatar(current_user), class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
@@ -14,7 +21,6 @@
                         <%= link_to "Profile", user_path(current_user), class: "dropdown-item" %>
                         <%= link_to "Messages", "#", class: "dropdown-item" %>
                         <%= link_to "My Teams", "#", class: "dropdown-item" %>
-                        <%= link_to "Forum", "#", class: "dropdown-item" %>
                         <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
                             <i class="fas fa-sign-out-alt" id="logout-button"></i>
                         <% end %>
