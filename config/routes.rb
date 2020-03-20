@@ -3,5 +3,7 @@ Rails.application.routes.draw do
 
     devise_for :users
 
-    resources :users, only: %i[show]
+    resources :users, only: %i[show] do
+        resources :teams
+    end
 end
