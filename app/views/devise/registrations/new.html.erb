@@ -9,8 +9,6 @@
     <%= form.input :password_confirmation, required: true, input_html: { autocomplete: "new-password" } %>
 </div>
 <div class="form-actions">
-    <%= form.button :submit, "Go Catch 'em All!'" %>
+    <%= form.button :submit, "Go Catch 'em All!", class: "btn btn-primary" %>
 </div>
 <% end %>
-
-<%= render "devise/shared/signup-links" %>
