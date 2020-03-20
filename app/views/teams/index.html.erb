@@ -1,0 +1,11 @@
+<h1>These are your teams!</h1>
+<ul>
+    <% @teams.each do |team| %>
+    <li>
+        <strong><%= team.name %></strong> =>
+        <% team.pokemon.each do |pokemon| %>
+            <%= pokemon %>
+        <% end %>
+    </li>
+    <% end %>
+</ul>
