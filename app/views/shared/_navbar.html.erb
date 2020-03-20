@@ -2,12 +2,9 @@
     <%= link_to root_path, class: "navbar-brand" do %>
         <%= image_tag "logo.png" %>
     <% end %>
-
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <% if user_signed_in? %>
@@ -25,7 +22,7 @@
                 </li>
             <% else %>
                 <li class="nav-item">
-                    <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#exampleModalCenter">
+                    <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#loginModal">
                         Login
                     </button>
                 </li>
@@ -33,18 +30,36 @@
         </ul>
     </div>
 </div>
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Login</h5>
+                <h5 class="modal-title" id="loginModalTitle">Login</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <%= render file: 'devise/sessions/new' %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Signup Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signupModalTitle">Sign Up</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <%= render file: 'devise/registrations/new' %>
             </div>
         </div>
     </div>
