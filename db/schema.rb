@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2020_03_23_154852) do
   create_table "pokemons", force: :cascade do |t|
     t.string "generation"
     t.string "pokedex_region"
-    t.string "locations", default: [], array: true
+    t.json "locations"
     t.integer "number"
     t.string "name"
     t.string "nickname"
@@ -47,9 +47,9 @@ ActiveRecord::Schema.define(version: 2020_03_23_154852) do
     t.string "type"
     t.json "evolutions"
     t.string "nature"
-    t.string "ability"
-    t.string "moves", default: [], array: true
-    t.string "learnable_moves", default: [], array: true
+    t.json "ability"
+    t.json "moves"
+    t.json "learnable_moves"
     t.json "egg"
     t.string "held_item"
     t.json "stats"
@@ -63,7 +63,6 @@ ActiveRecord::Schema.define(version: 2020_03_23_154852) do
 
   create_table "teams", force: :cascade do |t|
     t.string "name"
-    t.string "pokemon", default: [], array: true
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
