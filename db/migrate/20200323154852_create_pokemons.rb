@@ -3,20 +3,22 @@ class CreatePokemons < ActiveRecord::Migration[5.2]
     create_table :pokemons do |t|
       t.string :generation
       t.string :pokedex_region
-      t.string :locations
+      t.json :locations
       t.integer :number
       t.string :name
       t.string :nickname
-      t.string :gender
+      t.json :gender
       t.string :type
-      t.string :evolutions
+      t.json :evolutions
       t.string :nature
-      t.string :ability
-      t.string :moves
-      t.string :learnable_moves
-      t.string :egg
+      t.json :ability
+      t.json :moves
+      t.json :learnable_moves
+      t.json :egg
       t.string :held_item
-      t.string :stats
+      t.json :stats
+      t.references :user, foreign_key: true
+      t.references :team, foreign_key: true
 
       t.timestamps
     end

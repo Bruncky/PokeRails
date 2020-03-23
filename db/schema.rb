@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_20_151735) do
+ActiveRecord::Schema.define(version: 2020_03_23_154852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,31 @@ ActiveRecord::Schema.define(version: 2020_03_20_151735) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "pokemons", force: :cascade do |t|
+    t.string "generation"
+    t.string "pokedex_region"
+    t.string "locations", default: [], array: true
+    t.integer "number"
+    t.string "name"
+    t.string "nickname"
+    t.json "gender"
+    t.string "type"
+    t.json "evolutions"
+    t.string "nature"
+    t.string "ability"
+    t.string "moves", default: [], array: true
+    t.string "learnable_moves", default: [], array: true
+    t.json "egg"
+    t.string "held_item"
+    t.json "stats"
+    t.bigint "user_id"
+    t.bigint "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_pokemons_on_team_id"
+    t.index ["user_id"], name: "index_pokemons_on_user_id"
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string "name"
     t.string "pokemon", default: [], array: true
@@ -59,5 +84,7 @@ ActiveRecord::Schema.define(version: 2020_03_20_151735) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "pokemons", "teams"
+  add_foreign_key "pokemons", "users"
   add_foreign_key "teams", "users"
 end
