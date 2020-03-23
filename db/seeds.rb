@@ -8,10 +8,12 @@ Team.destroy_all
 puts "Destroying users..."
 User.destroy_all
 
+puts "--------------------"
+
 # -------------------- GENERATING USER --------------------
 puts "Generating user..."
 
-user = User.create!(name: "Bruno A. Brunckhorst", username: "bruncky", email: "bruncky@gmail.com", password: "DsRSu90wAD287$")
+user = User.create!(username: "bruncky", email: "bruncky@gmail.com", password: "DsRSu90wAD287$")
 # -------------------- GENERATING TEAM --------------------
 puts "Generating team..."
 
@@ -23,43 +25,42 @@ team.save!
 # -------------------- GENERATING POKÉMON --------------------
 puts "Generating Pokémans"
 
-pikachu = Pokemon.new({
+pikachu = Pokemon.new(
   generation: "I",
   pokedex_region: "Johto",
-  locations:
-  {
+  locations: {
       "sword":
       [
           "Route 4",
           "Rolling Fields",
-          "Stony Wilderness"
+          "Stony Wilderness",
+          {
+              "max raid battles":
+              [
+                  "Giant's Cap",
+                  "Giant's Mirror",
+                  "Hammerlocke Hills",
+                  "Lake of Outrage",
+                  "Motostoke Riverbank"
+              ]
+          }
       ],
-      {
-          "max raid battles":
-          [
-              "Giant's Cap",
-              "Giant's Mirror",
-              "Hammerlocke Hills",
-              "Lake of Outrage",
-              "Motostoke Riverbank"
-          ]
-      },
       "shield":
       [
           "Route 4 Shield",
           "Rolling Fields",
-          "Stony Wilderness"
-      ],
-      {
-          "max raid battles":
-          [
-              "Giant's Cap",
-              "Giant's Mirror",
-              "Hammerlocke Hills",
-              "Lake of Outrage",
-              "Motostoke Riverbank"
-          ]
-      }
+          "Stony Wilderness",
+          {
+              "max raid battles":
+              [
+                  "Giant's Cap",
+                  "Giant's Mirror",
+                  "Hammerlocke Hills",
+                  "Lake of Outrage",
+                  "Motostoke Riverbank"
+              ]
+          }
+      ]
   },
   number: 25,
   name: "Pikachu",
@@ -68,9 +69,11 @@ pikachu = Pokemon.new({
   level: 99,
   evolutions: {"thunderstone": "Raichu"},
   nature: "Calm",
-  ability: {"name": "Static", "description": "The opponent has a 30% chance of being induced with PARALYZE when using an attack, that requires physical contact, against this Pokémon."},
-  moves:
-  {
+  ability: {
+      "name": "Static",
+      "description": "The opponent has a 30% chance of being induced with PARALYZE when using an attack, that requires physical contact, against this Pokémon."
+  },
+  moves: {
       "Thunder Shock": {
           "type": "Electric",
           "category": "Special",
@@ -108,8 +111,7 @@ pikachu = Pokemon.new({
           "description": "The target is slammed with a long tail, vines, or the like to inflict damage."
       }
   },
-  learnable_moves:
-  {
+  learnable_moves: {
       "Discharge": {
           "level": 32,
           "type": "Electric",
@@ -122,65 +124,66 @@ pikachu = Pokemon.new({
       }
   },
   held_item: "Magnet",
-  stats:
-  {
+  stats: {
       "HP": 267,
       "Attack": 250,
       "Defense": 136,
       "Speed": 274,
       "Sp. Def": 180,
       "Sp. Attack": 223
-  },
-})
+  }
+)
 
-charizard = Pokemon.new({
+charizard = Pokemon.new(
   generation: "I",
   pokedex_region: "Johto",
-  locations:
-  {
+  locations: {
       "sword":
       [
           "Route 4",
           "Rolling Fields",
-          "Stony Wilderness"
+          "Stony Wilderness",
+          {
+              "max raid battles":
+              [
+                  "Giant's Cap",
+                  "Giant's Mirror",
+                  "Hammerlocke Hills",
+                  "Lake of Outrage",
+                  "Motostoke Riverbank"
+              ]
+          }
       ],
-      {
-          "max raid battles":
-          [
-              "Giant's Cap",
-              "Giant's Mirror",
-              "Hammerlocke Hills",
-              "Lake of Outrage",
-              "Motostoke Riverbank"
-          ]
-      },
       "shield":
       [
           "Route 4 Shield",
           "Rolling Fields",
-          "Stony Wilderness"
-      ],
-      {
-          "max raid battles":
-          [
-              "Giant's Cap",
-              "Giant's Mirror",
-              "Hammerlocke Hills",
-              "Lake of Outrage",
-              "Motostoke Riverbank"
-          ]
-      }
+          "Stony Wilderness",
+          {
+              "max raid battles":
+              [
+                  "Giant's Cap",
+                  "Giant's Mirror",
+                  "Hammerlocke Hills",
+                  "Lake of Outrage",
+                  "Motostoke Riverbank"
+              ]
+          }
+      ]
   },
   number: 6,
   name: "Charizard",
+  nickname: "Angry Chicken",
   gender: "male",
   types: ["Fire", "Flying"],
   level: 86,
   evolutions: {"thunderstone": "Raichu"},
   nature: "Calm",
-  ability: {"name": "Static", "description": "The opponent has a 30% chance of being induced with PARALYZE when using an attack, that requires physical contact, against this Pokémon."},
-  moves:
-  {
+  ability: {
+      "name": "Static",
+      "description": "The opponent has a 30% chance of being induced with PARALYZE when using an attack, that requires physical contact, against this Pokémon."
+  },
+  moves: {
       "Thunder Shock": {
           "type": "Electric",
           "category": "Special",
@@ -218,8 +221,7 @@ charizard = Pokemon.new({
           "description": "The target is slammed with a long tail, vines, or the like to inflict damage."
       }
   },
-  learnable_moves:
-  {
+  learnable_moves: {
       "Discharge": {
           "level": 32,
           "type": "Electric",
@@ -232,16 +234,15 @@ charizard = Pokemon.new({
       }
   },
   held_item: "Magnet",
-  stats:
-  {
+  stats: {
       "HP": 267,
       "Attack": 250,
       "Defense": 136,
       "Speed": 274,
       "Sp. Def": 180,
       "Sp. Attack": 223
-  },
-})
+  }
+)
 
 pikachu.user = User.last
 pikachu.team = Team.last
