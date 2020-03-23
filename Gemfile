@@ -17,6 +17,8 @@ gem 'uglifier'
 gem 'webpacker'
 gem 'cloudinary'
 gem 'bootstrap-sass'
+gem 'json', '~> 2.3'
+gem 'poke-api-v2'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
