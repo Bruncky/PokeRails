@@ -2,7 +2,8 @@ class CreatePokemons < ActiveRecord::Migration[5.2]
   def change
     create_table :pokemons do |t|
       t.string :generation
-      t.string :region
+      t.string :pokedex_region
+      t.string :locations
       t.integer :number
       t.string :name
       t.string :nickname
