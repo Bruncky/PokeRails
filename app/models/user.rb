@@ -6,5 +6,6 @@ class User < ApplicationRecord
 
     has_one_attached :avatar
 
-    has_many :teams, :pokemons
+    has_many :teams
+    has_many :pokemons
 end
