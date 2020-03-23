@@ -6,7 +6,7 @@
                 <h2><%= team.name %></h2><br>
                 <% team.pokemons.each do |pokemon| %>
                     <div class="card">
-                        <%= image_tag(pokemon.photos.first, class: "card-img-top")%>
+                        <%= cl_image_tag(pokemon.photos.first.key, class: "card-img-top")%>
                         <div class="card-body">
                                 <% if pokemon.nickname.nil? %>
                                     <h5 class="card-title"><%= pokemon.name %> - <strong>Lv: </strong><%= pokemon.level %></h5>
