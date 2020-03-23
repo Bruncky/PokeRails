@@ -17,6 +17,8 @@ class CreatePokemons < ActiveRecord::Migration[5.2]
       t.string :egg
       t.string :held_item
       t.string :stats
+      t.references :user, foreign_key: true
+      t.references :team, foreign_key: true
 
       t.timestamps
     end
