@@ -1,6 +1,6 @@
 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |form| %>
     <div class="form-inputs">
-        <%= form.input :username, required: false, placeholder: "case-sensitive!", autofocus: true, input_html: { autocomplete: "username" } %>
+        <%= form.input :username, required: false, label: "Username (case-sensitive)", autofocus: true, input_html: { autocomplete: "username" } %>
         <%= form.input :password, required: false, input_html: { autocomplete: "current-password" } %>
         <%= form.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
         <%= render "devise/shared/login-links" %>
