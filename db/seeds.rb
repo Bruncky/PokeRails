@@ -143,8 +143,8 @@ pikachu.team = Team.last
 pikachu_photo = URI.open("https://res.cloudinary.com/bruncky/image/upload/v1584990964/Pok%C3%A9Rails/Seed%20Images/Pikachu.png")
 pikachu_photo_shiny = URI.open("https://res.cloudinary.com/bruncky/image/upload/v1584990964/Pok%C3%A9Rails/Seed%20Images/Pikachu%20Shiny.png")
 
-pikachu.photo.attach(io: pikachu_photo, filename: 'pikachu.png', content_type: 'image/png')
-pikachu.photo.attach(io: pikachu_photo_shiny, filename: 'pikachu_shiny.png', content_type: 'image/png')
+pikachu.photos.attach(io: pikachu_photo, filename: 'pikachu.png', content_type: 'image/png')
+pikachu.photos.attach(io: pikachu_photo_shiny, filename: 'pikachu_shiny.png', content_type: 'image/png')
 # -----
 pikachu.save!
 
@@ -265,7 +265,7 @@ charizard.team = Team.last
 charizard_photo = URI.open("https://res.cloudinary.com/bruncky/image/upload/v1584990965/Pok%C3%A9Rails/Seed%20Images/Charizard.png")
 charizard_photo_shiny = URI.open("https://res.cloudinary.com/bruncky/image/upload/v1584990965/Pok%C3%A9Rails/Seed%20Images/Charizard%20Shiny.png")
 
-charizard.photo.attach(io: charizard_photo, filename: 'charizard.png', content_type: 'image/png')
-charizard.photo.attach(io: charizard_photo_shiny, filename: 'charizard_shiny.png', content_type: 'image/png')
+charizard.photos.attach(io: charizard_photo, filename: 'charizard.png', content_type: 'image/png')
+charizard.photos.attach(io: charizard_photo_shiny, filename: 'charizard_shiny.png', content_type: 'image/png')
 # -----
 charizard.save!
