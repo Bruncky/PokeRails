@@ -1,3 +1,5 @@
+require 'open-uri'
+
 # -------------------- TRACKING INFORMATION --------------------
 puts "Destroying Pokémans"
 Pokemon.destroy_all
@@ -25,6 +27,7 @@ team.save!
 # -------------------- GENERATING POKÉMON --------------------
 puts "Generating Pokémans"
 
+# --------------- Pikachu ---------------
 pikachu = Pokemon.new(
   generation: "I",
   pokedex_region: "Johto",
@@ -133,7 +136,19 @@ pikachu = Pokemon.new(
       "Sp. Attack": 223
   }
 )
+# -----
+pikachu.user = User.last
+pikachu.team = Team.last
+# -----
+pikachu_photo = URI.open("https://res.cloudinary.com/bruncky/image/upload/v1584990964/Pok%C3%A9Rails/Seed%20Images/Pikachu.png")
+pikachu_photo_shiny = URI.open("https://res.cloudinary.com/bruncky/image/upload/v1584990964/Pok%C3%A9Rails/Seed%20Images/Pikachu%20Shiny.png")
 
+pikachu.photos.attach(io: pikachu_photo, filename: 'pikachu.png', content_type: 'image/png')
+pikachu.photos.attach(io: pikachu_photo_shiny, filename: 'pikachu_shiny.png', content_type: 'image/png')
+# -----
+pikachu.save!
+
+# --------------- Charizard ---------------
 charizard = Pokemon.new(
   generation: "I",
   pokedex_region: "Johto",
@@ -243,13 +258,14 @@ charizard = Pokemon.new(
       "Sp. Attack": 223
   }
 )
-
-pikachu.user = User.last
-pikachu.team = Team.last
-
-pikachu.save!
-
+# -----
 charizard.user = User.last
 charizard.team = Team.last
+# -----
+charizard_photo = URI.open("https://res.cloudinary.com/bruncky/image/upload/v1584990965/Pok%C3%A9Rails/Seed%20Images/Charizard.png")
+charizard_photo_shiny = URI.open("https://res.cloudinary.com/bruncky/image/upload/v1584990965/Pok%C3%A9Rails/Seed%20Images/Charizard%20Shiny.png")
 
+charizard.photos.attach(io: charizard_photo, filename: 'charizard.png', content_type: 'image/png')
+charizard.photos.attach(io: charizard_photo_shiny, filename: 'charizard_shiny.png', content_type: 'image/png')
+# -----
 charizard.save!
