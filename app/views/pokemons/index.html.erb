@@ -3,13 +3,13 @@
     <h1>All the Pokémans!</h1>
     <div class="container">
         <div class="row no-gutters">
-            <% PokeApi.get(:pokemon).results.each do |pokemon_object| %>
+            <% PokeApi.get(pokemon: {offset: 0, limit: 151}).results.each do |pokemon_object| %>
                 <% pokemon = PokeApi.get(pokemon: "#{pokemon_object.name}") %>
                 <div class="col-3">
                     <div class="card" style="width: 250px;">
                         <%= image_tag(pokemon.sprites.front_default, class: "card-img-top") %>
                         <div class="card-body">
-                            <h5 class="card-title"><%= pokemon.name.capitalize %></h5>
+                            <h5 class="card-title"><%= pokemon.name.capitalize %> - #<%= pokemon.id %></h5>
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
