@@ -1,0 +1,49 @@
+<% require 'poke-api-v2' %>
+<div class="container">
+    <h1>All the Pokémans!</h1>
+    <div class="container">
+        <div class="row no-gutters">
+            <% PokeApi.get(:pokemon).results.each do |pokemon_object| %>
+                <% pokemon = PokeApi.get(pokemon: "#{pokemon_object.name}") %>
+                <div class="col-3">
+                    <div class="card" style="width: 250px;">
+                        <%= image_tag(pokemon.sprites.front_default, class: "card-img-top") %>
+                        <div class="card-body">
+                            <h5 class="card-title"><%= pokemon.name.capitalize %></h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <strong>Type</strong><br>
+                                <% pokemon.types.each do |type| %>
+                                    <%= type.type.name.capitalize %>
+                                <% end %>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Abilities</strong><br>
+                                <% pokemon.abilities.each do |ability| %>
+                                    <%= ability.ability.name.capitalize %><br>
+                                <% end %>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Moves</strong><br>
+                                <% pokemon.moves.each do |move| %>
+                                    <%= move.move.name.capitalize %><br>
+                                <% end %>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Stats</strong><br>
+                                <% pokemon.stats.each do |stat| %>
+                                    <strong><%= stat.stat.name.capitalize %></strong> => <%= stat.base_stat %><br>
+                                <% end %>
+                            </li>
+                        </ul>
+                        <div class="card-body">
+                            <a href="#" class="card-link">Card link</a>
+                            <a href="#" class="card-link">Another link</a>
+                        </div>
+                    </div>
+                </div>
+                <% end %>
+        </div>
+    </div>
+</div>
