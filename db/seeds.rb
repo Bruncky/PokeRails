@@ -16,13 +16,17 @@ puts "--------------------"
 puts "Generating user..."
 
 user = User.create!(username: "bruncky", email: "bruncky@gmail.com", password: "DsRSu90wAD287$")
-# -------------------- GENERATING TEAM --------------------
+# -------------------- GENERATING TEAMS --------------------
 puts "Generating team..."
 
-team = Team.new(name: "Main Team")
-team.user = user
+team_one = Team.new(name: "Main Team")
+team_one.user = user
 
-team.save!
+team_two = Team.new(name: "Battle Mansion Team")
+team_two.user = user
+
+team_one.save!
+team_two.save!
 
 # -------------------- GENERATING POKÉMON --------------------
 puts "Generating Pokémans"
