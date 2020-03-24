@@ -2,24 +2,25 @@
     <h1>These are your teams!</h1><br>
     <div class="container">
         <% @teams.each do |team| %>
-            <div class="row">
-                <h2><%= team.name %></h2><br>
+        <h2><%= team.name %></h2><br>
+            <div class="row no-gutters">
                 <% team.pokemons.each do |pokemon| %>
+                <div class="col-4">
                     <div class="card" style="width: 250px;">
                         <%= cl_image_tag(pokemon.photos.first.key, class: "card-img-top")%>
                         <div class="card-body">
-                                <% if pokemon.nickname.nil? %>
-                                    <h5 class="card-title"><%= pokemon.name %> - <strong>Lv: </strong><%= pokemon.level %></h5>
-                                <% else %>
-                                    <h5 class="card-title"><%= pokemon.nickname %> - <strong>Lv: </strong><%= pokemon.level %></h5>
-                                    <h6 class="card-title"><%= pokemon.name %></h6>
-                                <% end %>
+                            <% if pokemon.nickname.nil? %>
+                            <h5 class="card-title"><%= pokemon.name %> - <strong>Lv: </strong><%= pokemon.level %></h5>
+                            <% else %>
+                            <h5 class="card-title"><%= pokemon.nickname %> - <strong>Lv: </strong><%= pokemon.level %></h5>
+                            <h6 class="card-title"><%= pokemon.name %></h6>
+                            <% end %>
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                 <strong>Type</strong><br>
                                 <% pokemon.types.each do |type| %>
-                                    <%= type %>
+                                <%= type %>
                                 <% end %>
                             </li>
                             <li class="list-group-item">
@@ -29,7 +30,7 @@
                             <li class="list-group-item">
                                 <strong>Moves</strong><br>
                                 <% pokemon.moves.each do |move, detail| %>
-                                    <%= move %><br>
+                                <%= move %><br>
                                 <% end %>
                             </li>
                             <li class="list-group-item">
@@ -39,7 +40,7 @@
                             <li class="list-group-item">
                                 <strong>Stats</strong><br>
                                 <% pokemon.stats.each do |name, value| %>
-                                    <strong><%= name %></strong> => <%= value %><br>
+                                <strong><%= name %></strong> => <%= value %><br>
                                 <% end %>
                             </li>
                         </ul>
@@ -48,6 +49,7 @@
                             <a href="#" class="card-link">Another link</a>
                         </div>
                     </div>
+                </div>
                 <% end %>
             </div>
         <% end %>
