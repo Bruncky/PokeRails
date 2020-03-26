@@ -1,7 +1,7 @@
 require 'open-uri'
 require 'nokogiri'
 
-class PokemonScraper
+class PokemonAccessor
     def call
         # Opens the URL and reads it
         html_doc = Nokogiri::HTML(open("https://pokemondb.net/pokedex/national").read)
