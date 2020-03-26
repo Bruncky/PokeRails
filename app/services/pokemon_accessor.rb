@@ -23,42 +23,11 @@ class PokemonAccessor
 
     # private
 
-    def scrape_names
-        # Opens the URL and reads it
-        html_doc = Nokogiri::HTML(open("https://pokemondb.net/pokedex/national").read)
-
-        # Searches the URL for the given CSS selector
-        html_doc.search('.ent-name').each_with_index.map do |element, index|
-            element.text
-        end
-    end
-
     def save_pokemon(pokemon)
         pokemon = Pokemon.new(
             generation: scrape_generation(pokemon),
             pokedex_region: @regions[scrape_generation(pokemon)],
-            locations: {
-                "sword":
-                [
-                    {
-                        "max raid battles":
-                        [
-                            "Giant's Cap",
-                            "Motostoke Riverbank"
-                        ]
-                    }
-                ],
-                "shield":
-                [
-                    {
-                        "max raid battles":
-                        [
-                            "Giant's Cap",
-                            "Motostoke Riverbank"
-                        ]
-                    }
-                ]
-            },
+            locations: scrape_locations,
             number: 26,
             name: pokemon,
             gender: {
@@ -146,33 +115,62 @@ class PokemonAccessor
         pokemon.save!
     end
 
+    # -------------------- SCRAPING METHODS --------------------
+
+    def scrape_names
+        # Opens the URL and reads it
+        html_doc = Nokogiri::HTML(open("https://pokemondb.net/pokedex/national").read)
+
+        # Searches the URL for the given CSS selector
+        html_doc.search('.ent-name').each_with_index.map do |element, index|
+            element.text
+        end
+    end
+
     def scrape_generation(pokemon)
         # Opens the URL and reads it
         html_doc = Nokogiri::HTML(open("https://pokemondb.net/pokedex/#{pokemon}").read)
 
-        # Searches the URL for the given CSS selector
+        # Searches the URL for all the Generation in which that Pokémon was introduced
+        # This is also used to determine the PokéDex region of origin for that Pokémon
         html_doc.search('.data-table.sprites-table.sprites-history-table > thead > tr th[2]').text
     end
 
-    # def scrape_test
-    #     # Opens the URL and reads it
-    #     html_doc = Nokogiri::HTML(open("https://bulbapedia.bulbagarden.net/wiki/Bulbasaur_(Pokemon)").read)
-    #
-    #     games_hash = {}
-    #     # Searches the URL for the given CSS selector
-    #     # This gets all the games + useless stuff
-    #     html_doc.search('.roundytr.roundybottom .roundy th a').map do |game|
-    #         game.text.strip
-    #     end.reject! { |string| string.nil? || string.empty? }.map do |name|
-    #         games_hash[name] = []
-    #     end
-    #
-    #     html_doc.search('.roundytr.roundybottom .roundy td').map do |location|
-    #         location.text.strip
-    #     end.reject! { |string| string.nil? || string.empty? }.each_with_index do |location_name, index|
-    #         games_hash[]  location_name
-    #     end
-    #
-    #     games_hash
-    # end
+    def scrape_locations(pokemon)
+        # Opens the URL and reads it
+        html_doc = Nokogiri::HTML(open("https://bulbapedia.bulbagarden.net/wiki/#{pokemon}_(Pokemon)").read)
+
+        games_hash = {}
+
+        # Searches the URL for a table containing the name of a game and where the
+        # Pokémon can be found inside that game
+        html_doc.search('.roundytr.roundybottom .roundy tr')[0..43].map do |row|
+            row.search('th a').map do |game|
+                row.search('tr > td').map do |location|
+                    games_hash[game.text.strip] = location.text.strip
+                end
+            end
+        end.reject! { |string| string.nil? || string.empty? }
+
+        games_hash
+    end
+
+#     def scrape_test
+#         # Opens the URL and reads it
+#         html_doc = Nokogiri::HTML(open("https://bulbapedia.bulbagarden.net/wiki/Bulbasaur_(Pokemon)").read)
+#
+#         games_hash = {}
+#
+#         # Searches the URL for the given CSS selector
+#         # This gets all the games + useless stuff
+#         html_doc.search('.roundytr.roundybottom .roundy tr')[0..43].map do |row|
+#             row.search('th a').map do |game|
+#                 row.search('tr > td').map do |location|
+#                     games_hash[game.text.strip] = location.text.strip
+#                 end
+#             end
+#         end.reject! { |string| string.nil? || string.empty? }
+#
+#         games_hash
+#     end
 end
