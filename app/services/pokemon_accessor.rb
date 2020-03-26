@@ -21,14 +21,14 @@ class PokemonAccessor
         end
     end
 
-    # private
+    private
 
     def save_pokemon(pokemon)
         pokemon = Pokemon.new(
             generation: scrape_generation(pokemon),
             pokedex_region: @regions[scrape_generation(pokemon)],
-            locations: scrape_locations,
-            number: 26,
+            locations: scrape_locations(pokemon),
+            number: scrape_number(pokemon),
             name: pokemon,
             gender: {
                 "gender": "Male",
@@ -155,22 +155,19 @@ class PokemonAccessor
         games_hash
     end
 
-#     def scrape_test
-#         # Opens the URL and reads it
-#         html_doc = Nokogiri::HTML(open("https://bulbapedia.bulbagarden.net/wiki/Bulbasaur_(Pokemon)").read)
-#
-#         games_hash = {}
-#
-#         # Searches the URL for the given CSS selector
-#         # This gets all the games + useless stuff
-#         html_doc.search('.roundytr.roundybottom .roundy tr')[0..43].map do |row|
-#             row.search('th a').map do |game|
-#                 row.search('tr > td').map do |location|
-#                     games_hash[game.text.strip] = location.text.strip
-#                 end
-#             end
-#         end.reject! { |string| string.nil? || string.empty? }
-#
-#         games_hash
-#     end
+    def scrape_number(pokemon)
+        # Opens the URL and reads it
+        html_doc = Nokogiri::HTML(open("https://bulbapedia.bulbagarden.net/wiki/#{pokemon}_(Pokemon)").read)
+
+        # Searches the URL for the Pokémon's number and returns it as a String
+        html_doc.search('big a').select{|link| link['title'] == "List of Pokémon by National Pokédex number"}[0].text
+    end
+
+    def scrape_test
+        # Opens the URL and reads it
+        html_doc = Nokogiri::HTML(open("https://bulbapedia.bulbagarden.net/wiki/Bulbasaur_(Pokemon)").read)
+
+        # Searches the URL for the Pokémon's number and returns it as a String
+        html_doc.search('big a').select{|link| link['title'] == "List of Pokémon by National Pokédex number"}[0].text
+    end
 end
