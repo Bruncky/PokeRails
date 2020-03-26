@@ -21,7 +21,7 @@ class PokemonAccessor
         end
     end
 
-    private
+    # private <- DO NOT FORGET TO PRIVATISE
 
     def save_pokemon(pokemon)
         pokemon = Pokemon.new(
@@ -30,14 +30,7 @@ class PokemonAccessor
             locations: scrape_locations(pokemon),
             number: scrape_number(pokemon),
             name: pokemon,
-            gender: {
-                "gender": "Male",
-                "ratio":
-                {
-                    "male": 50.2,
-                    "female": 49.8
-                }
-            },
+            gender: scrape_test(pokemon),
             types: ["Electric"],
             level: 100,
             nature: "Bashful",
@@ -163,11 +156,16 @@ class PokemonAccessor
         html_doc.search('big a').select{|link| link['title'] == "List of Pokémon by National Pokédex number"}[0].text
     end
 
-    def scrape_test
+    def scrape_test(pokemon)
         # Opens the URL and reads it
-        html_doc = Nokogiri::HTML(open("https://bulbapedia.bulbagarden.net/wiki/Bulbasaur_(Pokemon)").read)
+        html_doc = Nokogiri::HTML(open("https://pokemondb.net/pokedex/#{pokemon}").read)
+
+        gender_hash = {}
 
         # Searches the URL for the Pokémon's number and returns it as a String
-        html_doc.search('big a').select{|link| link['title'] == "List of Pokémon by National Pokédex number"}[0].text
+        gender_hash["male"] = html_doc.search('.text-blue').text.split(" ")[0]
+        gender_hash["female"] = html_doc.search('.text-pink').text.split(" ")[0]
+
+        gender_hash
     end
 end
