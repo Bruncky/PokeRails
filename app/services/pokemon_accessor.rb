@@ -21,7 +21,7 @@ class PokemonAccessor
         end
     end
 
-    # private <- DO NOT FORGET TO PRIVATISE
+    private # <- DO NOT FORGET TO PRIVATISE
 
     def save_pokemon(pokemon)
         pokemon = Pokemon.new(
