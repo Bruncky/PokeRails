@@ -30,7 +30,7 @@ class PokemonAccessor
             locations: scrape_locations(pokemon),
             number: scrape_number(pokemon),
             name: pokemon,
-            gender: scrape_test(pokemon),
+            gender: scrape_gender(pokemon),
             types: ["Electric"],
             level: 100,
             nature: "Bashful",
@@ -154,6 +154,19 @@ class PokemonAccessor
 
         # Searches the URL for the Pokémon's number and returns it as a String
         html_doc.search('big a').select{|link| link['title'] == "List of Pokémon by National Pokédex number"}[0].text
+    end
+
+    def scrape_gender(pokemon)
+        # Opens the URL and reads it
+        html_doc = Nokogiri::HTML(open("https://pokemondb.net/pokedex/#{pokemon}").read)
+
+        gender_hash = {}
+
+        # Searches the URL for the Pokémon's number and returns it as a String
+        gender_hash["male"] = html_doc.search('.text-blue').text.split(" ")[0]
+        gender_hash["female"] = html_doc.search('.text-pink').text.split(" ")[0]
+
+        gender_hash
     end
 
     def scrape_test(pokemon)
