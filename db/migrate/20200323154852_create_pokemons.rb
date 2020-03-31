@@ -8,7 +8,7 @@ class CreatePokemons < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :nickname
       t.json :gender
-      t.string :types, array: true, default: []
+      t.json :types
       t.integer :level
       t.json :evolutions
       t.string :nature
