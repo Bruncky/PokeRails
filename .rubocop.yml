@@ -1,43 +1,58 @@
 AllCops:
-  Exclude:
-    - 'bin/**/*'
-    - 'db/**/*'
-    - 'config/**/*'
-    - 'node_modules/**/*'
-    - 'script/**/*'
-    - 'support/**/*'
-    - 'tmp/**/*'
-    - 'test/**/*'
+    Exclude:
+        - 'bin/**/*'
+        - 'db/**/*'
+        - 'config/**/*'
+        - 'node_modules/**/*'
+        - 'script/**/*'
+        - 'support/**/*'
+        - 'tmp/**/*'
+        - 'test/**/*'
 
+# --------------- STYLE ---------------
+Style/AsciiComments:
+    Enabled: false
 Style/ConditionalAssignment:
-    Enabled: true
-Style/StringLiterals:
-    Enabled: true
-Style/RedundantReturn:
     Enabled: true
 Style/Documentation:
     Enabled: true
-Style/WordArray:
-    Enabled: true
-Style/MutableConstant:
-    Enabled: true
-Style/SignalException:
-    Enabled: true
-Style/MissingRespondToMissing:
-    Enabled: true
-Style/MethodMissingSuper:
+Style/EmptyMethod:
     Enabled: true
 Style/FrozenStringLiteralComment:
     Enabled: false
-Style/EmptyMethod:
+Style/MethodMissingSuper:
     Enabled: true
+Style/MissingRespondToMissing:
+    Enabled: true
+Style/MutableConstant:
+    Enabled: true
+Style/RedundantReturn:
+    Enabled: true
+Style/SignalException:
+    Enabled: true
+Style/StringLiterals:
+    Enabled: true
+    EnforcedStyle: double_quotes
+Style/WordArray:
+    Enabled: true
+
+# --------------- METRICS ---------------
+Metrics/AbcSize:
+    Enabled: false
 Metrics/CyclomaticComplexity:
     Enabled: true
-Metrics/AbcSize:
-    Enabled: true
-Layout/LineLength:
-    Max: 110
+Metrics/ClassLength:
+    Max: 130
+Metrics/MethodLength:
+    Max: 20
+    ExcludedMethods: [save_pokemon]
+
+# --------------- LAYOUT ---------------
 Layout/IndentationWidth:
     Width: 4
+Layout/LineLength:
+    Max: 110
+
+# --------------- BUNDLER ---------------
 Bundler/OrderedGems:
     Enabled: false
