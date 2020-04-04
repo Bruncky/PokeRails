@@ -22,7 +22,7 @@ gem 'poke-api-v2'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
-  gem 'rubocop'
+  gem 'rubocop', require: false
 end
 
 group :development, :test do
