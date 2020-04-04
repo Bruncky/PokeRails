@@ -1,6 +1,7 @@
-require 'open-uri'
-require 'nokogiri'
+require "open-uri"
+require "nokogiri"
 
+# This is the SO that will scrape the web for all Pokémon and save their info in the DB
 class PokemonAccessor
     def initialize
         @regions = {
@@ -115,7 +116,7 @@ class PokemonAccessor
         html_doc = Nokogiri::HTML(open("https://pokemondb.net/pokedex/national").read)
 
         # Searches the URL for the given CSS selector
-        html_doc.search('.ent-name').each_with_index.map do |element, index|
+        html_doc.search(".ent-name").each_with_index.map do |element, _index|
             element.text
         end
     end
@@ -126,7 +127,7 @@ class PokemonAccessor
 
         # Searches the URL for all the Generation in which that Pokémon was introduced
         # This is also used to determine the PokéDex region of origin for that Pokémon
-        html_doc.search('.data-table.sprites-table.sprites-history-table > thead > tr th[2]').text
+        html_doc.search(".data-table.sprites-table.sprites-history-table > thead > tr th[2]").text
     end
 
     def scrape_locations(pokemon)
@@ -137,13 +138,15 @@ class PokemonAccessor
 
         # Searches the URL for a table containing the name of a game and where the
         # Pokémon can be found inside that game
-        html_doc.search('.roundytr.roundybottom .roundy tr')[0..43].map do |row|
-            row.search('th a').map do |game|
-                row.search('tr > td').map do |location|
+        html_doc.search(".roundytr.roundybottom .roundy tr")[0..43].map do |row|
+            row.search("th a").map do |game|
+                row.search("tr > td").map do |location|
                     games_hash[game.text.strip] = location.text.strip
                 end
             end
-        end.reject! { |string| string.nil? || string.empty? }
+        end
+
+        html_doc.reject! { |string| string.nil? || string.empty? }
 
         games_hash
     end
