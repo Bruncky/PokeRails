@@ -102,9 +102,9 @@ GEM
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
     json (2.3.0)
-    listen (3.0.8)
-      rb-fsevent (~> 0.9, >= 0.9.4)
-      rb-inotify (~> 0.9, >= 0.9.7)
+    listen (3.2.1)
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.5.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -129,7 +129,7 @@ GEM
     parallel (1.19.1)
     parser (2.7.1.2)
       ast (~> 2.4.0)
-    pg (0.21.0)
+    pg (1.2.3)
     poke-api-v2 (0.1.0)
     pry (0.13.1)
       coderay (~> 1.1)
@@ -259,11 +259,11 @@ DEPENDENCIES
   cloudinary
   devise
   dotenv-rails
-  font-awesome-sass (~> 5.12.0)
-  jbuilder (~> 2.0)
+  font-awesome-sass (>= 5.12.0)
+  jbuilder (>= 2.0)
   json (~> 2.3)
-  listen (~> 3.0.5)
-  pg (~> 0.21)
+  listen (>= 3.0.5)
+  pg (>= 0.21)
   poke-api-v2
   pry-byebug
   pry-rails
@@ -274,7 +274,7 @@ DEPENDENCIES
   sassc-rails
   simple_form
   spring
-  spring-watcher-listen (~> 2.0.0)
+  spring-watcher-listen (>= 2.0.0)
   uglifier
   web-console (>= 3.3.0)
   webpacker
