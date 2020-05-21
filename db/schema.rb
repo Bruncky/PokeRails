@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2020_03_26_180403) do
     t.string "name"
     t.string "nickname"
     t.json "gender"
-    t.string "types", default: [], array: true
+    t.json "types"
     t.integer "level"
     t.json "evolutions"
     t.string "nature"

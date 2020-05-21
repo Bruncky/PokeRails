@@ -22,24 +22,17 @@ class PokemonAccessor
         end
     end
 
-    # private
+    #private # <- DO NOT FORGET TO PRIVATISE
 
     def save_pokemon(pokemon)
         pokemon = Pokemon.new(
             generation: scrape_generation(pokemon),
             pokedex_region: @regions[scrape_generation(pokemon)],
-            locations: scrape_locations,
-            number: 26,
+            locations: scrape_locations(pokemon),
+            number: scrape_number(pokemon),
             name: pokemon,
-            gender: {
-                "gender": "Male",
-                "ratio":
-                {
-                    "male": 50.2,
-                    "female": 49.8
-                }
-            },
-            types: ["Electric"],
+            gender: scrape_gender(pokemon),
+            types: scrape_types(pokemon),
             level: 100,
             nature: "Bashful",
             ability: {
@@ -158,22 +151,81 @@ class PokemonAccessor
         games_hash
     end
 
-#     def scrape_test
-#         # Opens the URL and reads it
-#         html_doc = Nokogiri::HTML(open("https://bulbapedia.bulbagarden.net/wiki/Bulbasaur_(Pokemon)").read)
-#
-#         games_hash = {}
-#
-#         # Searches the URL for the given CSS selector
-#         # This gets all the games + useless stuff
-#         html_doc.search('.roundytr.roundybottom .roundy tr')[0..43].map do |row|
-#             row.search('th a').map do |game|
-#                 row.search('tr > td').map do |location|
-#                     games_hash[game.text.strip] = location.text.strip
-#                 end
-#             end
-#         end.reject! { |string| string.nil? || string.empty? }
-#
-#         games_hash
-#     end
+    def scrape_number(pokemon)
+        # Opens the URL and reads it
+        html_doc = Nokogiri::HTML(open("https://bulbapedia.bulbagarden.net/wiki/#{pokemon}_(Pokemon)").read)
+
+        # Searches the URL for the Pokémon's number and returns it as a String
+        html_doc.search('big a').select{ |link| link['title'] == "List of Pokémon by National Pokédex number" }[0].text
+    end
+
+    def scrape_gender(pokemon)
+        # Opens the URL and reads it
+        html_doc = Nokogiri::HTML(open("https://pokemondb.net/pokedex/#{pokemon}").read)
+
+        gender_hash = {}
+
+        # Searches the URL for the Pokémon's gender ratio and returns it as a Hash
+        gender_hash["male"] = html_doc.search('.text-blue').text.split(" ")[0]
+        gender_hash["female"] = html_doc.search('.text-pink').text.split(" ")[0]
+
+        gender_hash
+    end
+
+    def scrape_types(pokemon)
+        # Opens the URL and reads it
+        html_doc = Nokogiri::HTML(open("https://bulbapedia.bulbagarden.net/wiki/#{pokemon}_(Pokemon)").read)
+
+        type_array = []
+        type_hash = {}
+
+        # Searches the URL for the Pokémon's types and returns it as a Hash
+        # This selects the table whose second child contains the String "Type"
+        type_table = html_doc.search('td.roundy').select do |table|
+            table.children.children.any? { |child| child.text == 'Type' }
+        end
+
+        if type_table.empty?
+            # In cases where Pokémon have different types for different forms, type_table will turn up empty
+            # This handles that by merely looking for 'Types' rather than 'Type'
+            type_table = html_doc.search('td.roundy').select { |table| table.children.children.any? { |child| child.text == 'Types' } }
+
+            # This 'sets the stage' by finding any 'td' elements in type_table
+            # Then we search for every element separately, within that td
+            type_table[0].search('td').each do |table_data|
+                table_data.search('small').each do |form|
+                    # Getting rid of empty Strings
+                    unless form.text.empty?
+                        # This searches each form's parent (so the corresponding 'td') for links
+                        # whose texts include " (type)" (notice the whitespace here)
+                        types = form.parent.search('table a').select { |link| link['title'].include?(' (type)') }
+
+                        # Finally, this pushes the text of each link into type_array, unless the String is "Unknown"
+                        # Then we use the Hash to store the Array with each Pokémon form as key
+                        types.each do |type|
+                            type_array << type.text unless type.text == "Unknown"
+
+                            type_hash[form.text] = type_array.uniq
+                        end
+                    end
+                end
+            end
+
+            type_hash
+        else
+            # This iterates over type_table and finds the links whose texts include " (type)" (notice the whitespace here)
+            types = type_table[0].search('table a').select do |link|
+                link['title'].include?(' (type)')
+            end
+
+            # Finally, this pushes the text of each link into type_array, unless the String is "Unknown"
+            types.each do |type|
+                type_array << type.text unless type.text == "Unknown"
+
+                type_hash["Main Form"] = type_array
+            end
+
+            type_hash
+        end
+    end
 end
