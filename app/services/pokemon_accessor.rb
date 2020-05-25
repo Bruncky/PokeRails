@@ -146,7 +146,7 @@ class PokemonAccessor
             end
         end
 
-        html_doc.reject! { |string| string.nil? || string.empty? }
+        html_doc.reject { |string| string.nil? || string.empty? }
 
         games_hash
     end
