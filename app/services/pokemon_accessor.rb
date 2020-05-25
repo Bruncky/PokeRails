@@ -113,7 +113,7 @@ class PokemonAccessor
 
     def scrape_names
         # Opens the URL and reads it
-        html_doc = Nokogiri::HTML(open("https://pokemondb.net/pokedex/national").read)
+        html_doc = Nokogiri::HTML(URI.open("https://pokemondb.net/pokedex/national").read)
 
         # Searches the URL for the given CSS selector
         html_doc.search(".ent-name").each_with_index.map do |element, _index|
@@ -123,7 +123,7 @@ class PokemonAccessor
 
     def scrape_generation(pokemon)
         # Opens the URL and reads it
-        html_doc = Nokogiri::HTML(open("https://pokemondb.net/pokedex/#{pokemon}").read)
+        html_doc = Nokogiri::HTML(URI.open("https://pokemondb.net/pokedex/#{pokemon}").read)
 
         # Searches the URL for all the Generation in which that Pokémon was introduced
         # This is also used to determine the PokéDex region of origin for that Pokémon
@@ -132,7 +132,7 @@ class PokemonAccessor
 
     def scrape_locations(pokemon)
         # Opens the URL and reads it
-        html_doc = Nokogiri::HTML(open("https://bulbapedia.bulbagarden.net/wiki/#{pokemon}_(Pokemon)").read)
+        html_doc = Nokogiri::HTML(URI.open("https://bulbapedia.bulbagarden.net/wiki/#{pokemon}_(Pokemon)").read)
 
         games_hash = {}
 
@@ -153,7 +153,7 @@ class PokemonAccessor
 
     def scrape_number(pokemon)
         # Opens the URL and reads it
-        html_doc = Nokogiri::HTML(open("https://bulbapedia.bulbagarden.net/wiki/#{pokemon}_(Pokemon)").read)
+        html_doc = Nokogiri::HTML(URI.open("https://bulbapedia.bulbagarden.net/wiki/#{pokemon}_(Pokemon)").read)
 
         # Searches the URL for the Pokémon's number and returns it as a String
         html_doc.search('big a').select{ |link| link['title'] == "List of Pokémon by National Pokédex number" }[0].text
@@ -161,7 +161,7 @@ class PokemonAccessor
 
     def scrape_gender(pokemon)
         # Opens the URL and reads it
-        html_doc = Nokogiri::HTML(open("https://pokemondb.net/pokedex/#{pokemon}").read)
+        html_doc = Nokogiri::HTML(URI.open("https://pokemondb.net/pokedex/#{pokemon}").read)
 
         gender_hash = {}
 
@@ -174,7 +174,7 @@ class PokemonAccessor
 
     def scrape_types(pokemon)
         # Opens the URL and reads it
-        html_doc = Nokogiri::HTML(open("https://bulbapedia.bulbagarden.net/wiki/#{pokemon}_(Pokemon)").read)
+        html_doc = Nokogiri::HTML(URI.open("https://bulbapedia.bulbagarden.net/wiki/#{pokemon}_(Pokemon)").read)
 
         type_array = []
         type_hash = {}
