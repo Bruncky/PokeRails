@@ -17,12 +17,12 @@ class PokemonAccessor
     end
 
     def call
-        scrape_names[0..8].each do |pokemon|
+        ScrapeNames.new.call[0..8].each do |pokemon|
             save_pokemon(pokemon)
         end
     end
 
-    #private # <- DO NOT FORGET TO PRIVATISE
+    # private # <- DO NOT FORGET TO PRIVATISE
 
     def save_pokemon(pokemon)
         pokemon = Pokemon.new(
