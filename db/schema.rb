@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_21_151446) do
+ActiveRecord::Schema.define(version: 2021_05_20_233445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(version: 2020_05_21_151446) do
   end
 
   create_table "pokemons", force: :cascade do |t|
-    t.string "generation"
-    t.string "pokedex_region"
+    t.string "original_generation"
+    t.string "original_pokedex_region"
     t.json "locations"
     t.string "number"
     t.string "name"
