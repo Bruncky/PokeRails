@@ -52,7 +52,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <%= render file: 'devise/sessions/new' %>
+                <%= render file: Rails.root.join('app', 'views', 'devise', 'sessions', 'new.html.erb').to_s %>
             </div>
         </div>
     </div>
@@ -69,7 +69,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <%= render file: 'devise/registrations/new' %>
+                <%= render file: Rails.root.join('app', 'views', 'devise', 'registrations', 'new.html.erb').to_s %>
             </div>
         </div>
     </div>
